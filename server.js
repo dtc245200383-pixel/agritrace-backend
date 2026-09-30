@@ -35,9 +35,10 @@ app.post("/api/land-plots", async (req, res) => {
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error("Database Error:", err);
     res.status(500).json({
-      error: err.message || "Lỗi kết nối CSDL hoặc truy vấn thất bại",
+      success: false,
+      error: String(err.message || err || "Lỗi kết nối CSDL PostgreSQL"),
     });
   }
 });
